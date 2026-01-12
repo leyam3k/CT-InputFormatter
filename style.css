@@ -1,153 +1,251 @@
-/* Actions extension picker styling (unchanged) */
-#actions-picker {
+/* ============================================================================
+ * CT-InputFormatter Extension Styles
+ * ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+ * Formatter Picker (Popup Menu)
+ * ---------------------------------------------------------------------------- */
+
+#ctif-picker {
   position: absolute;
   z-index: 1000;
   margin-left: -41px !important;
 }
 
-.act--picker {
+.ctif-picker {
   background-color: var(--SmartThemeBlurTintColor);
   border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
 
-.act--picker.act--active {
+.ctif-picker.ctif-picker-active {
   opacity: 1;
   pointer-events: auto;
 }
 
-.act--item {
+.ctif-picker-item {
   display: flex;
   align-items: center;
   padding: 5px 10px;
   cursor: pointer;
   opacity: 0.7;
   height: 40px;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
 }
 
-.act--item:hover {
-  background-color: rgba(0,0,0,0.1);
+.ctif-picker-item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
   opacity: 1;
 }
 
-.act--icon {
+.ctif-picker-icon {
   margin-right: 8px;
+  width: 24px;
+  text-align: center;
 }
 
-.act--label .act--title {
+.ctif-picker-label {
+  flex: 1;
+}
+
+.ctif-picker-title {
   font-size: 14px;
 }
 
-/* NEW/MODIFIED STYLES for dynamic settings panel */
+/* ----------------------------------------------------------------------------
+ * Trigger Button
+ * ---------------------------------------------------------------------------- */
 
-#actions-list-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+#ctif-trigger-button {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+  order: 11;
 }
 
-.action-settings-item {
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    overflow: hidden;
-    background-color: var(--background-color-h);
+#ctif-trigger-button:hover {
+  opacity: 1;
 }
 
-/* Distinct style for the header of each action item */
-.action-item-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 10px;
-    cursor: pointer;
+/* ----------------------------------------------------------------------------
+ * Settings Panel
+ * ---------------------------------------------------------------------------- */
+
+/* Only apply flex when not closed - don't override ST's .closed display:none */
+.ctif-extension-settings .inline-drawer-content:not(.closed) {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.action-item-header b {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin-right: 10px;
+.ctif-settings-description {
+  font-size: 0.9em;
+  opacity: 0.8;
+  margin-bottom: 5px;
 }
 
-.action-controls {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex-shrink: 0;
+.ctif-settings-description code {
+  background-color: var(--SmartThemeBlurTintColor);
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 0.9em;
 }
 
-.action-controls i {
-    cursor: pointer;
-    opacity: 0.6;
-    transition: opacity 0.2s, transform 0.2s;
+#ctif-formatters-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.action-controls i:hover {
-    opacity: 1;
+.ctif-empty-message {
+  opacity: 0.6;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
 }
 
-.action-controls .delete-action:hover {
-    color: var(--danger-color);
+/* Individual formatter settings item */
+.ctif-settings-item {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--background-color-h);
 }
 
-/* Rotate the new chevron icon when expanded */
-.action-item-header.expanded .action-toggle-icon {
-    transform: rotate(180deg);
+/* Header of each formatter item */
+.ctif-settings-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-/* Distinct style for the content area of each action item */
-.action-item-content {
-    padding: 10px;
-    background-color: var(--background-color);
-    border-top: 1px solid var(--border-color);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out, border 0.3s ease-in-out;
-    max-height: 500px;
-    overflow: hidden;
+.ctif-settings-item-header:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
-.action-item-content.closed {
-    max-height: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    border-top-color: transparent;
+.ctif-settings-item-header b {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 10px;
+  flex: 1;
 }
 
-.action-setting-field {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+/* Control buttons (move up/down, delete, toggle) */
+.ctif-settings-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-shrink: 0;
 }
 
-.action-setting-field label {
-    font-weight: bold;
-    font-size: 0.9em;
+.ctif-settings-controls i {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
 }
 
-.action-setting-field input,
-.action-setting-field textarea {
-    width: 100%;
+.ctif-settings-controls i:hover {
+  opacity: 1;
 }
 
-.actions-add-button-container {
-    margin-top: 15px;
-    padding-top: 10px;
-    border-top: 1px solid var(--border-color);
-    text-align: center;
+.ctif-settings-controls .ctif-delete:hover {
+  color: var(--danger-color, #dc3545);
 }
+
+/* Rotate the chevron icon when expanded */
+.ctif-settings-item-header.ctif-expanded .ctif-toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* Content area of each formatter item */
+.ctif-settings-item-content {
+  padding: 10px;
+  background-color: var(--background-color);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out,
+    border-color 0.3s ease-in-out;
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.ctif-settings-item-content.ctif-collapsed {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-top-color: transparent;
+}
+
+/* Form fields */
+.ctif-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ctif-field label {
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.ctif-field input,
+.ctif-field textarea {
+  width: 100%;
+}
+
+.ctif-help-text {
+  font-size: 0.85em;
+  opacity: 0.7;
+}
+
+.ctif-help-text code {
+  background-color: var(--SmartThemeBlurTintColor);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* Add button container */
+.ctif-add-button-container {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.ctif-add-button-container button i {
+  margin-right: 5px;
+}
+
+/* ----------------------------------------------------------------------------
+ * Mobile Responsive Styles
+ * ---------------------------------------------------------------------------- */
 
 @media only screen and (max-width: 768px) {
-    #actions-picker {
-        margin-right: -37px !important;
-		margin-bottom: -35px !important;
-    }
-	.act--item {
-        height: 50px;
-    }
+  #ctif-picker {
+    margin-right: -37px !important;
+    margin-bottom: -35px !important;
+  }
+
+  .ctif-picker-item {
+    height: 50px;
+    padding: 8px 12px;
+  }
+
+  .ctif-settings-controls {
+    gap: 20px;
+  }
+
+  .ctif-settings-controls i {
+    font-size: 1.1em;
+  }
 }

@@ -1,16 +1,27 @@
-<div class="actions-extension-settings">
-    <div class="inline-drawer">
-        <div class="inline-drawer-toggle inline-drawer-header">
-            <b>Actions</b>
-            <div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div>
-        </div>
-        <div class="inline-drawer-content">
-            <div id="actions-list-container">
-                <!-- Action settings will be dynamically injected here by index.js -->
-            </div>
-            <div class="actions-add-button-container">
-                <button id="add-new-action-button" class="menu_button">Add New Action</button>
-            </div>
-        </div>
+<div class="ctif-extension-settings">
+  <div class="inline-drawer">
+    <div class="inline-drawer-toggle inline-drawer-header">
+      <b>Input Formatter</b>
+      <div
+        class="inline-drawer-icon fa-solid fa-circle-chevron-down down"
+      ></div>
     </div>
+    <div class="inline-drawer-content closed">
+      <div class="ctif-settings-description">
+        <p>
+          Create text formatting templates to quickly transform your chat input.
+          Use <code>{{msg}}</code> as a placeholder for your text and
+          <code>{{csr}}</code> to set cursor position.
+        </p>
+      </div>
+      <div id="ctif-formatters-list">
+        <!-- Formatter settings will be dynamically injected here by index.js -->
+      </div>
+      <div class="ctif-add-button-container">
+        <button id="ctif-add-formatter-button" class="menu_button">
+          <i class="fa-solid fa-plus"></i> Add Formatter
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
