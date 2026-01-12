@@ -1,0 +1,153 @@
+/* Actions extension picker styling (unchanged) */
+#actions-picker {
+  position: absolute;
+  z-index: 1000;
+  margin-left: -41px !important;
+}
+
+.act--picker {
+  background-color: var(--SmartThemeBlurTintColor);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.act--picker.act--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.act--item {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  cursor: pointer;
+  opacity: 0.7;
+  height: 40px;
+}
+
+.act--item:hover {
+  background-color: rgba(0,0,0,0.1);
+  opacity: 1;
+}
+
+.act--icon {
+  margin-right: 8px;
+}
+
+.act--label .act--title {
+  font-size: 14px;
+}
+
+/* NEW/MODIFIED STYLES for dynamic settings panel */
+
+#actions-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.action-settings-item {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: var(--background-color-h);
+}
+
+/* Distinct style for the header of each action item */
+.action-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.action-item-header b {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+.action-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.action-controls i {
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.action-controls i:hover {
+    opacity: 1;
+}
+
+.action-controls .delete-action:hover {
+    color: var(--danger-color);
+}
+
+/* Rotate the new chevron icon when expanded */
+.action-item-header.expanded .action-toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* Distinct style for the content area of each action item */
+.action-item-content {
+    padding: 10px;
+    background-color: var(--background-color);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out, border 0.3s ease-in-out;
+    max-height: 500px;
+    overflow: hidden;
+}
+
+.action-item-content.closed {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top-color: transparent;
+}
+
+.action-setting-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.action-setting-field label {
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.action-setting-field input,
+.action-setting-field textarea {
+    width: 100%;
+}
+
+.actions-add-button-container {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+    #actions-picker {
+        margin-right: -37px !important;
+		margin-bottom: -35px !important;
+    }
+	.act--item {
+        height: 50px;
+    }
+}
