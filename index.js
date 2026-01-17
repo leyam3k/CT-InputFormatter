@@ -64,7 +64,7 @@ function getSettings() {
   for (const key of Object.keys(DEFAULT_SETTINGS)) {
     if (!Object.hasOwn(extensionSettings[MODULE_NAME], key)) {
       extensionSettings[MODULE_NAME][key] = structuredClone(
-        DEFAULT_SETTINGS[key]
+        DEFAULT_SETTINGS[key],
       );
     }
   }
@@ -138,7 +138,7 @@ function applyFormatter(template) {
   // Apply macro substitution and replace {{msg}} placeholder
   let formattedText = substituteParams(template).replace(
     /\{\{msg\}\}/gi,
-    currentText
+    currentText,
   );
 
   // Trim leading whitespace if the input was empty
@@ -258,6 +258,11 @@ function initializePicker() {
   state.triggerButton.title = "Input Formatter";
   state.triggerButton.innerHTML = '<i class="fa-solid fa-pen-nib"></i>';
 
+  // Prevent focus loss when clicking the trigger button
+  state.triggerButton.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+  });
+
   // Toggle picker on button click
   state.triggerButton.addEventListener("click", () => {
     togglePicker();
@@ -310,7 +315,7 @@ function renderSettingsPanel() {
 
   if (!formatters || formatters.length === 0) {
     container.html(
-      '<p class="ctif-empty-message">No formatters configured. Click "Add Formatter" to create one.</p>'
+      '<p class="ctif-empty-message">No formatters configured. Click "Add Formatter" to create one.</p>',
     );
     return;
   }
@@ -331,19 +336,19 @@ function renderSettingsPanel() {
                     <div class="ctif-field">
                         <label>Name:</label>
                         <input data-property="name" class="text_pole" value="${escapeHtml(
-                          formatter.name
+                          formatter.name,
                         )}">
                     </div>
                     <div class="ctif-field">
                         <label>Icon (FontAwesome class):</label>
                         <input data-property="icon" class="text_pole" value="${escapeHtml(
-                          formatter.icon
+                          formatter.icon,
                         )}" placeholder="fa-icon-name">
                     </div>
                     <div class="ctif-field">
                         <label>Template:</label>
                         <textarea data-property="template" class="text_pole" rows="3">${escapeHtml(
-                          formatter.template
+                          formatter.template,
                         )}</textarea>
                         <small class="ctif-help-text">Use <code>{{msg}}</code> for input text, <code>{{csr}}</code> for cursor position</small>
                     </div>
@@ -429,7 +434,7 @@ function migrateSettings() {
   // Check for old "actions" key and migrate to "formatters"
   if (settings.actions && !settings.formatters) {
     console.log(
-      `[${MODULE_NAME}] Migrating settings from 'actions' to 'formatters'`
+      `[${MODULE_NAME}] Migrating settings from 'actions' to 'formatters'`,
     );
     settings.formatters = settings.actions.map((action) => ({
       name: action.name,
